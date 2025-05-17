@@ -1,0 +1,172 @@
+/* ================================
+   Common Layout and Navbar Styles
+================================ */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  background: #333;
+  padding: 1rem;
+  width: 100%;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 15px;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 15px;
+}
+
+/* ================================
+   Index Page Styles (Table + Search)
+================================ */
+.page-content {
+  max-width: 800px;
+  margin: 30px auto;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+a {
+  display: inline-block;
+  margin-bottom: 15px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+a:hover {
+  background-color: #0056b3;
+}
+
+/* ✅ Search Form on Index */
+.search-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-form input[type="text"] {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-form input[type="submit"] {
+  padding: 8px 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-form input[type="submit"]:hover {
+  background-color: #218838;
+}
+
+/* ✅ Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Clear Search Button */
+.clear-search-button {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #dc3545;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.clear-search-button:hover {
+  background-color: #c82333;
+}
+
+/* ================================
+   Create Page Styles (Contact Form)
+================================ */
+.create-form {
+  display: flex;
+  max-width: 500px;
+  margin: auto;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.create-form input,
+.create-form select,
+.create-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.create-form button,
+.create-form input[type="submit"] {
+  padding: 10px;
+  background-color: #000;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-size: 15px;
+}
