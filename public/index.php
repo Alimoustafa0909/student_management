@@ -4,7 +4,7 @@ require '../config/db.php';
 
 // Get search from the url 
 $search = $_GET['search'] ?? '';
-$searchParam = "%" . $conn->real_escape_string($search) . "%"; //3a4an amn3 el sql injection 
+$searchParam = "%" . $conn->real_escape_string($search) . "%"; //3a4an amn3 el sql injection  the % symbols is for the like query to match any string in the database 
 
 // Search Query
 $sql = "SELECT * FROM students WHERE name LIKE '$searchParam' OR id LIKE '$searchParam'";
