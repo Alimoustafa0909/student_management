@@ -83,29 +83,56 @@ h3 {
 /* 
    Buttons and Links
  */
-a,
+/* General Button Reset */
 button,
-input[type="submit"] {
+a.button {
   display: inline-block;
   padding: 5px 10px;
   font-size: 14px;
-  background-color: #000;
-  color: white;
-  text-decoration: none;
   border: none;
   border-radius: 2px;
   cursor: pointer;
+  text-decoration: none;
 }
 
-a:hover,
-button:hover,
-input[type="submit"]:hover {
+/* Add New Student Button */
+.add-button {
+  background-color: #000;
+  color: #fff;
+}
+.add-button:hover {
   background-color: #444;
 }
 
+/* Search Button */
+.search-button {
+  background-color: #28a745;
+  color: #fff;
+}
+.search-button:hover {
+  background-color: #218838;
+}
+
+/* Edit Button */
+.edit-button {
+  background-color: #007bff;
+  color: #fff;
+}
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Delete Button */
+.delete-button {
+  background-color: #dc3545;
+  color: #fff;
+}
+.delete-button:hover {
+  background-color: #c82333;
+}
 /* Clear Search Button */
 .clear-search-button {
-  background-color: #dc3545;
+  background-color: #f50018;
 }
 
 .clear-search-button:hover {

@@ -2,19 +2,13 @@
 session_start();
 require '../config/db.php';
 
+// Get search from the url 
 $search = $_GET['search'] ?? '';
+$searchParam = "%" . $conn->real_escape_string($search) . "%"; //3a4an amn3 el sql injection 
 
-
-$sql = "SELECT * FROM students WHERE name LIKE :search OR id LIKE :search";
-$stmt = $pdo->prepare($sql);
-
-
-$searchParam = '%' . $search . '%';
-$stmt->bindParam(':search', $searchParam, PDO::PARAM_STR);
-
-
-$stmt->execute();
-$students = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Search Query
+$sql = "SELECT * FROM students WHERE name LIKE '$searchParam' OR id LIKE '$searchParam'";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -29,45 +23,38 @@ $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="page-content">
         <h2>Student List</h2>
-        <a href="create.php">+ Add New Student</a><br><br>
+<a href="create.php" class="button add-button" style="margin-bottom: 15px;">+ Add New Student</a>
 
-
+        <!-- Search Form -->
         <form method="GET" class="search-form">
             <input type="text" name="search" placeholder="Search by name or ID" value="<?= htmlspecialchars($search) ?>">
+            <input type="submit" value="Search">
             <?php if (!empty($search)): ?>
-                <a href="index.php" class="clear-search-button">Clear Search</a>
-            <?php else: ?>
-                <input type="submit" value="Search">
+                <a  href="index.php" class="button clear-search-button">Clear Search</a>
             <?php endif; ?>
         </form>
 
-        <?php if (count($students) > 0): ?>
+        <?php if ($result && $result->num_rows > 0): ?>
             <table>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Gender</th>
-                    <th>Phone</th>
-                    <?php if (!empty($_SESSION['admin'])): ?>
-                    <th>Actions</th>
-                    <?php endif; ?>
+                    <th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Phone</th>
+                    <?php if (!empty($_SESSION['admin'])): ?><th>Actions</th><?php endif; ?>
                 </tr>
-                <?php foreach ($students as $row): ?>
+                <?php while ($row = $result->fetch_assoc()): ?>
                     <tr>
-                        <td><?= htmlspecialchars($row['id']) ?></td>
-                        <td><?= htmlspecialchars($row['name']) ?></td>
-                        <td><?= htmlspecialchars($row['email']) ?></td>
-                        <td><?= htmlspecialchars($row['gender']) ?></td>
-                        <td><?= htmlspecialchars($row['phone']) ?></td>
+                        <td><?= $row['id'] ?></td>
+                        <td><?= $row['name'] ?></td>
+                        <td><?= $row['email'] ?></td>
+                        <td><?= $row['gender'] ?></td>
+                        <td><?= $row['phone'] ?></td>
                         <?php if (!empty($_SESSION['admin'])): ?>
-                        <td>
-                     <a href="edit.php?id=<?= $row['id'] ?>">Edit</a> |
-                     <a href="delete.php?id=<?= $row['id'] ?>">Delete</a>
-                        </td>
+                            <td>
+<a href="edit.php?id=<?= $row['id'] ?>" class="button add-button">Edit</a>
+<a href="delete.php?id=<?= $row['id'] ?>" class="button delete-button">Delete</a>
+                            </td>
                         <?php endif; ?>
                     </tr>
-                <?php endforeach; ?>
+                <?php endwhile; ?>
             </table>
         <?php else: ?>
             <p>No students found.</p>

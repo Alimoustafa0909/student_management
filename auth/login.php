@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="password">Password</label>
             <input type="password" name="password" required>
 
-            <button type="submit">Login</button>
+            <button class="add-button" type="submit">Login</button>
         </form>
     </div>
 </body>
