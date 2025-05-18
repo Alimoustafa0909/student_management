@@ -77,31 +77,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 document.getElementById("studentForm").addEventListener("submit", function (e) {
     let hasError = false;
 
-    // Get form values
+
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
     const gender = document.getElementById("gender").value;
     const phone = document.getElementById("phone").value.trim();
 
-    // Get error elements
+
     const nameError = document.getElementById("nameError");
     const emailError = document.getElementById("emailError");
     const genderError = document.getElementById("genderError");
     const phoneError = document.getElementById("phoneError");
 
-    // Reset errors
+
     nameError.textContent = "";
     emailError.textContent = "";
     genderError.textContent = "";
     phoneError.textContent = "";
 
-    // Validate Name
+ 
     if (name === "") {
         nameError.textContent = "Name is required.";
         hasError = true;
     }
 
-    // Validate Email
     if (email === "") {
         emailError.textContent = "Email is required.";
         hasError = true;
@@ -110,19 +109,25 @@ document.getElementById("studentForm").addEventListener("submit", function (e) {
         hasError = true;
     }
 
-    // Validate Gender
+
     if (gender === "") {
         genderError.textContent = "Gender is required.";
         hasError = true;
     }
 
-    // Validate Phone
-    if (!/^\d{1,15}$/.test(phone)) {
-        phoneError.textContent = "Phone must be numeric and up to 15 digits only.";
+    if (phone === "") {
+        phoneError.textContent = "Phone is required.";
+        hasError = true;
+    } else if (phone.length > 12) {
+        phoneError.textContent = "Phone must be up to 15 digits only.";
+        hasError = true;
+    } else if (!/^[0-12]+$/.test(phone)) {
+        phoneError.textContent = "Phone must be a number.";
         hasError = true;
     }
+   
 
-    // Stop form submission if errors exist
+
     if (hasError) {
         e.preventDefault();
     }

@@ -1,13 +1,10 @@
-<?php session_start(); ?>
-<!-- Start of Navbar -->
+
 <header>
   <nav>
     <div class="nav-container">
 
-      <!-- Centered Title -->
       <span class="navbar-title">Student Management System</span>
 
-      <!-- Right Side Navigation -->
       <ul class="nav-links">
         <li><a href="../public/index.php" class="nav-btn">Home</a></li>
         <?php if (empty($_SESSION['admin'])): ?>
