@@ -30,11 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql = "INSERT INTO students (name, email, gender, phone) VALUES ('$name', '$email', '$gender', '$phone')";
         if ($conn->query($sql)) {
             header("Location: index.php");
-            exit;
-        } else {
-            $error = "Failed to save student.";
-        }
     }
+}
 }
 ?>
 <!DOCTYPE html>

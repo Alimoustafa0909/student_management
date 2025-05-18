@@ -48,9 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $updateSql = "UPDATE students SET name='$name', email='$email', gender='$gender', phone='$phone' WHERE id=$id";
         if ($conn->query($updateSql)) {
             header("Location: index.php");
-            exit;
-        } else {
-            $error = "Failed to update student.";
         }
     }
 }
