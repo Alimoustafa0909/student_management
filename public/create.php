@@ -6,10 +6,16 @@ function validateStudent($name, $email, $gender, $phone) {
     if (!$name || !$email || !$gender || !$phone) {
         return "All fields are required.";
     }
+
+  
+    if (!preg_match('/^[a-zA-Z\s]+$/', $name)) {
+        return "Name must contain only char";
+    }
+
+    // Check that the phone contains only Numbers and is up to 12 Numbers
     if (!preg_match('/^[0-9]{1,12}$/', $phone)) {
         return "Phone must be numeric and 12 digits max.";
     }
-    return null;
 }
 
 
