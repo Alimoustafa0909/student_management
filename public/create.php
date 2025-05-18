@@ -51,14 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <h2>Add New Student</h2>
 
     <?php if (!empty($error)): ?>
-        <p class="error"><?= htmlspecialchars($error) ?></p>
+        <p class="error"><?= $error ?></p>
     <?php endif; ?>
 
     <form method="POST" class="create-form" id="studentForm">
-        <input type="text" name="name" id="name" placeholder="Your Name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>">
+        <input type="text" name="name" id="name" placeholder="Your Name" value="<?= $_POST['name'] ?? '' ?>">
         <small class="error" id="nameError"></small>
 
-        <input type="email" name="email" id="email" placeholder="Your Email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+        <input type="email" name="email" id="email" placeholder="Your Email" value="<?= $_POST['email'] ?? '' ?>">
         <small class="error" id="emailError"></small>
 
         <select name="gender" id="gender">
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </select>
         <small class="error" id="genderError"></small>
 
-        <input type="text" name="phone" id="phone" placeholder="Your Phone" value="<?= htmlspecialchars($_POST['phone'] ?? '') ?>">
+        <input type="text" name="phone" id="phone" placeholder="Your Phone" value="<?= $_POST['phone'] ?? '' ?>">
         <small class="error" id="phoneError"></small>
 
         <button class="add-button" type="submit">Save</button>

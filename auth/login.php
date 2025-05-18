@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="admin-form-container">
         <h1>Admin Login </h1>
         <?php if (!empty($error)): ?>
-            <p class="error"><?= htmlspecialchars($error) ?></p>
+            <p class="error"><?= $error ?></p>
         <?php endif; ?>
 
         <form class="create-form" method="POST">

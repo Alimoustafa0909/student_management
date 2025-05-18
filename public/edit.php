@@ -69,18 +69,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <h2>Edit Student</h2>
 
     <?php if (!empty($error)): ?>
-        <p class="error"><?= htmlspecialchars($error) ?></p>
+        <p class="error"><?= $error ?></p>
     <?php endif; ?>
 
     <form method="POST" class="create-form">
-        <input type="text" name="name" value="<?= htmlspecialchars($student['name']) ?>" required>
-        <input type="email" name="email" value="<?= htmlspecialchars($student['email']) ?>" required>
+        <input type="text" name="name" value="<?= $student['name'] ?>" required>
+        <input type="email" name="email" value="<?= $student['email'] ?>" required>
         <select name="gender" required>
             <option value="">Select Gender</option>
             <option value="Male" <?= $student['gender'] === 'Male' ? 'selected' : '' ?>>Male</option>
             <option value="Female" <?= $student['gender'] === 'Female' ? 'selected' : '' ?>>Female</option>
         </select>
-        <input type="text" name="phone" value="<?= htmlspecialchars($student['phone']) ?>" required>
+        <input type="text" name="phone" value="<?= $student['phone'] ?>" required>
         <button class="add-button" type="submit">Update</button>
     </form>
 </div>

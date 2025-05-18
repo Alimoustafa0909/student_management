@@ -27,7 +27,7 @@ $result = $conn->query($sql);
 
         <!-- Search Form -->
         <form method="GET" class="search-form">
-            <input type="text" name="search" placeholder="Search by name or ID" value="<?= htmlspecialchars($search) ?>">
+            <input type="text" name="search" placeholder="Search by name or ID" value="<?= $search ?>">
             <input type="submit" value="Search">
             <?php if (!empty($search)): ?>
                 <a  href="index.php" class="button clear-search-button">Clear Search</a>
