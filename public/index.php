@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../config/db.php';
 
 $search = $_GET['search'] ?? '';
@@ -48,7 +49,9 @@ $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th>Email</th>
                     <th>Gender</th>
                     <th>Phone</th>
+                    <?php if (!empty($_SESSION['admin'])): ?>
                     <th>Actions</th>
+                    <?php endif; ?>
                 </tr>
                 <?php foreach ($students as $row): ?>
                     <tr>
@@ -57,10 +60,12 @@ $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= htmlspecialchars($row['email']) ?></td>
                         <td><?= htmlspecialchars($row['gender']) ?></td>
                         <td><?= htmlspecialchars($row['phone']) ?></td>
+                        <?php if (!empty($_SESSION['admin'])): ?>
                         <td>
-                            <a href="edit.php?id=<?= $row['id'] ?>">Edit</a> |
-                            <a href="delete.php?id=<?= $row['id'] ?>">Delete</a>
+                     <a href="edit.php?id=<?= $row['id'] ?>">Edit</a> |
+                     <a href="delete.php?id=<?= $row['id'] ?>">Delete</a>
                         </td>
+                        <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
             </table>

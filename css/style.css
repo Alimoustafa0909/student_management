@@ -1,13 +1,20 @@
-/* ================================
-   Common Layout and Navbar Styles
-================================ */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+  padding-bottom: 50px;
+}
+
+/* 
+   Navbar Styles
+ */
 nav {
   background: #333;
   padding: 1rem;
@@ -16,32 +23,44 @@ nav {
 
 .nav-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  flex-wrap: wrap;
   max-width: 1000px;
   margin: auto;
 }
 
+.navbar-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-weight: bold;
+}
+
 .nav-links {
   display: flex;
-  flex-wrap: wrap;
   list-style: none;
   padding: 0;
   margin: 0;
-  gap: 15px;
+  gap: 10px;
 }
-
-.nav-links li a {
+.nav-links li a,
+.navbar-links a,
+.navbar-link {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  margin: 15px;
+  margin: 0 15px;
 }
 
-/* ================================
-   Index Page Styles (Table + Search)
-================================ */
+.navbar-links {
+  display: flex;
+  gap: 10px;
+}
+
+/* 
+   Page content
+   */
 .page-content {
   max-width: 800px;
   margin: 30px auto;
@@ -51,30 +70,80 @@ nav {
   padding: 20px;
 }
 
-h2 {
+/* 
+   H1,h2,h3
+ */
+h1,
+h2,
+h3 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-a {
+/* 
+   Buttons and Links
+ */
+a,
+button,
+input[type="submit"] {
   display: inline-block;
-  margin-bottom: 15px;
-  padding: 8px 12px;
-  background-color: #007bff;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #000;
   color: white;
   text-decoration: none;
-  border-radius: 4px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
 }
 
-a:hover {
-  background-color: #0056b3;
+a:hover,
+button:hover,
+input[type="submit"]:hover {
+  background-color: #444;
 }
 
-/* ✅ Search Form on Index */
+/* Clear Search Button */
+.clear-search-button {
+  background-color: #dc3545;
+}
+
+.clear-search-button:hover {
+  background-color: #c82333;
+}
+
+/* 
+   Forms */
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+  margin: auto;
+}
+
+.create-form input,
+.create-form select,
+.create-form textarea,
+form input,
+form select,
+form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+/* 
+   Search Form 
+ */
 .search-form {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
+  justify-content: center;
+  max-width: 600px;
+  margin: 0 auto 20px auto;
 }
 
 .search-form input[type="text"] {
@@ -82,6 +151,7 @@ a:hover {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  min-width: 200px;
 }
 
 .search-form input[type="submit"] {
@@ -97,10 +167,22 @@ a:hover {
   background-color: #218838;
 }
 
-/* ✅ Table Styling */
+/* 
+   Error
+ */
+.error {
+  color: red;
+  font-size: 15px;
+  text-align: center;
+}
+
+/* 
+   Table 
+ */
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 20px;
 }
 
 th,
@@ -114,59 +196,15 @@ th {
   background-color: #f2f2f2;
 }
 
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-tr:hover {
-  background-color: #f1f1f1;
-}
-
-/* Clear Search Button */
-.clear-search-button {
-  display: inline-block;
-  padding: 8px 12px;
-  background-color: #dc3545;
-  color: white;
-  border-radius: 4px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.clear-search-button:hover {
-  background-color: #c82333;
-}
-
-/* ================================
-   Create Page Styles (Contact Form)
-================================ */
-.create-form {
-  display: flex;
-  max-width: 500px;
-  margin: auto;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.create-form input,
-.create-form select,
-.create-form textarea {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  resize: vertical;
-}
-
-.create-form button,
-.create-form input[type="submit"] {
-  padding: 10px;
-  background-color: #000;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.error {
-  color: red;
-  font-size: 15px;
+/* 
+   Admin Form 
+ */
+.admin-form-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
