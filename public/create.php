@@ -1,23 +1,12 @@
 <?php
-require '../config/db.php';
+require '../classes/database.php';
+require '../classes/student.php';
+require '../classes/Validator.php';
 
-// Validation Function
-function validateStudent($name, $email, $gender, $phone) {
-    if (!$name || !$email || !$gender || !$phone) {
-        return "All fields are required.";
-    }
-
-  
-    if (!preg_match('/^[a-zA-Z\s]+$/', $name)) {
-        return "Name must contain only char";
-    }
-
-    // Check that the phone contains only Numbers and is up to 12 Numbers
-    if (!preg_match('/^[0-9]{1,12}$/', $phone)) {
-        return "Phone must be numeric and 12 digits max.";
-    }
-}
-
+// Initialize
+$db = new Database();
+$conn = $db->getConnection();
+$studentModel = new Student($conn);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name   = $_POST['name'];
@@ -25,19 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $gender = $_POST['gender'];
     $phone  = $_POST['phone'];
 
-    $error = validateStudent($name, $email, $gender, $phone);
+    $error = Validator::validateStudent($name, $email, $gender, $phone);
 
     if (!$error) {
-        $name   = $conn->real_escape_string($name);
-        $email  = $conn->real_escape_string($email);
-        $gender = $conn->real_escape_string($gender);
-        $phone  = $conn->real_escape_string($phone);
-
-        $sql = "INSERT INTO students (name, email, gender, phone) VALUES ('$name', '$email', '$gender', '$phone')";
-        if ($conn->query($sql)) {
+        if ($studentModel->create($name, $email, $gender, $phone)) {
             header("Location: index.php");
+            exit;
+        }
     }
-}
 }
 ?>
 <!DOCTYPE html>
@@ -66,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <select name="gender" id="gender">
             <option value="">Select Gender</option>
-            <option value="Male" <?= (($_POST['gender'] ?? '') == 'Male') ? 'selected' : '' ?>>Male</option>
-            <option value="Female" <?= (($_POST['gender'] ?? '') == 'Female') ? 'selected' : '' ?>>Female</option>
+            <option value="Male" <?= ($_POST['gender'] ?? '') == 'Male' ? 'selected' : '' ?>>Male</option>
+            <option value="Female" <?= ($_POST['gender'] ?? '') == 'Female' ? 'selected' : '' ?>>Female</option>
         </select>
         <small class="error" id="genderError"></small>
 
@@ -78,6 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 </div>
 </body>
+
+
 <script>
 document.getElementById("studentForm").addEventListener("submit", function (e) {
     let hasError = false;

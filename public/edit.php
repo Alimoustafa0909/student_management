@@ -1,54 +1,44 @@
 <?php
 session_start();
-require '../config/db.php';
-
+require '../classes/database.php';
+require '../classes/student.php';
+require '../classes/Validator.php';
 
 if (!isset($_SESSION['admin'])) {
     header("Location: ../auth/login.php");
     exit;
 }
 
+// Init DB and model
+$db = new Database();
+$conn = $db->getConnection();
+$studentModel = new Student($conn);
 
+// Get student ID
 $id = $_GET['id'] ?? null;
 if (!$id || !is_numeric($id)) {
     die('Invalid student ID.');
 }
 
-
-$id = (int) $id;
-$sql = "SELECT * FROM students WHERE id = $id";
-$result = $conn->query($sql);
-$student = $result->fetch_assoc();
-
+// Fetch student data
+$student = $studentModel->getById((int)$id);
 if (!$student) {
     die('Student not found.');
 }
 
-
-function validateStudent($name, $email, $gender, $phone) {
-    if (!$name || !$email || !$gender || !$phone) {
-        return "All fields are required.";
-    }
-    if (!preg_match('/^[0-9]{1,12}$/', $phone)) {
-        return "Phone must be numeric and 12 digits max.";
-    }
-    return null;
-}
-
-// Handle Form Submission
+// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name   = $conn->real_escape_string($_POST['name']);
-    $email  = $conn->real_escape_string($_POST['email']);
-    $gender = $conn->real_escape_string($_POST['gender']);
-    $phone  = $conn->real_escape_string($_POST['phone']);
+    $name   = $_POST['name'];
+    $email  = $_POST['email'];
+    $gender = $_POST['gender'];
+    $phone  = $_POST['phone'];
 
-    $error = validateStudent($name, $email, $gender, $phone);
+    $error = Validator::validateStudent($name, $email, $gender, $phone);
 
     if (!$error) {
-        $updateSql = "UPDATE students SET name='$name', email='$email', gender='$gender', phone='$phone' WHERE id=$id";
-        if ($conn->query($updateSql)) {
-            header("Location: index.php");
-        }
+        $studentModel->update($id, $name, $email, $gender, $phone);
+        header("Location: index.php");
+        exit;
     }
 }
 ?>
