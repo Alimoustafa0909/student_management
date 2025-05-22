@@ -9,14 +9,14 @@ if (!isset($_SESSION['admin'])) {
     exit;
 }
 
-// Init DB and model
+
 $db = new Database();
 $conn = $db->getConnection();
 $studentModel = new Student($conn);
 
 // Get student ID
 $id = $_GET['id'] ?? null;
-if (!$id || !is_numeric($id)) {
+if (!$id) {
     die('Invalid student ID.');
 }
 

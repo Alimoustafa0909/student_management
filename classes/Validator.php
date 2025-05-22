@@ -9,7 +9,7 @@ class Validator
         }
 
         if (!preg_match('/^[a-zA-Z\s]+$/', $name)) {
-            return "Name must contain only letters and spaces.";
+            return "Name must contain only letters.";
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -24,6 +24,6 @@ class Validator
             return "Phone must be numeric and up to 12 digits.";
         }
 
-        return null; // No errors
+        return null;
     }
 }

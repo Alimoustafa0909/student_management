@@ -15,14 +15,13 @@ if (!$id || !is_numeric($id)) {
     exit;
 }
 
-// Initialize database and student class
+
 $db = new Database();
 $conn = $db->getConnection();
 $studentModel = new Student($conn);
 
-// Delete student
 $studentModel->delete((int)$id);
 
-// Redirect
+
 header("Location: index.php");
 exit;

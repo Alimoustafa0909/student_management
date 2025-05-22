@@ -1,10 +1,7 @@
 <?php
 session_start();
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-// Load required classes
+
 require_once '../classes/database.php';
 require_once '../classes/student.php';
 
@@ -13,10 +10,10 @@ $db = new Database();
 $conn = $db->getConnection();
 $student = new Student($conn);
 
-// Get search term from URL (if any)
+// Get search 
 $search = $_GET['search'] ?? '';
 
-// Get all students matching search
+// abstraction
 $result = $student->getAll($search);
 ?>
 

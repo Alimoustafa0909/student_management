@@ -1,5 +1,5 @@
 <?php
-
+//Encapulate the class 
 class Student
 {
     private $conn;
@@ -9,7 +9,7 @@ class Student
         $this->conn = $conn;
     }
 
-    // Get all students, optionally filtered by search
+    // Get all students
     public function getAll($search = '')
     {
         $search = $this->conn->real_escape_string($search);
