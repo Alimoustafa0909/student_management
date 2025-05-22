@@ -17,11 +17,11 @@ class Validator
         }
 
         if (!in_array($gender, ['Male', 'Female'])) {
-            return "Invalid gender selected.";
+            return "Please select a gender.";
         }
 
         if (!preg_match('/^[0-9]{1,12}$/', $phone)) {
-            return "Phone must be numeric and up to 12 digits.";
+            return "Phone must be Number and up to 12 number.";
         }
 
         return null;
